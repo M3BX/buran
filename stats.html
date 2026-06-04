@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Статистика по боксам | Учёт электроэнергии</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .filters, .quick-filters {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: flex-end;
+        }
+        .filter-group {
+            flex: 1;
+            min-width: 140px;
+        }
+        .filter-group label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .filter-group select, .filter-group input {
+            width: 100%;
+            padding: 8px 10px;
+            border-radius: 16px;
+            border: 1px solid #cbd5e1;
+            font-size: 0.9rem;
+        }
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+            font-size: 0.9rem;
+        }
+        .stats-table th, .stats-table td {
+            border: 1px solid #e2e8f0;
+            padding: 10px 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+        .stats-table th {
+            background: #f1f5f9;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+        }
+        .stats-table th:hover {
+            background: #e2e8f0;
+        }
+        .stats-table th.asc::after { content: " ↑"; }
+        .stats-table th.desc::after { content: " ↓"; }
+        .stats-table tr:nth-child(even) { background: #f8fafc; }
+        .debt-positive { color: #dc2626; }
+        .debt-negative { color: #10b981; }
+        @media (max-width: 640px) {
+            .filters, .quick-filters { flex-direction: column; align-items: stretch; }
+            .stats-table, .stats-table thead, .stats-table tbody, .stats-table th, .stats-table td, .stats-table tr { display: block; }
+            .stats-table thead tr { display: none; }
+            .stats-table tr { margin-bottom: 16px; border: 1px solid #e2e8f0; border-radius: 16px; padding: 12px; }
+            .stats-table td { display: flex; justify-content: space-between; align-items: center; border: none; padding: 6px 0; }
+            .stats-table td::before { content: attr(data-label); font-weight: 600; width: 40%; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="nav-buttons" style="display: flex; gap: 12px; margin-bottom: 16px;">
+            <a href="index.html" class="badge" style="text-decoration: none; background:#3b82f6; color:white;">← На главную</a>
+        </div>
+        <h1>📊 Статистика по боксам</h1>
+        <p>Основные показатели: последние показания, последняя оплата, долг</p>
+    </div>
+
+    <div class="card">
+        <h2>🔍 Фильтры</h2>
+        <div class="filters">
+            <div class="filter-group">
+                <label>Буран</label>
+                <select id="filterBuran">
+                    <option value="all">Все</option>
+                    <option value="1">Буран 1</option>
+                    <option value="2">Буран 2</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Долг (руб) от</label>
+                <input type="number" id="filterDebtMin" placeholder="-∞">
+            </div>
+            <div class="filter-group">
+                <label>до</label>
+                <input type="number" id="filterDebtMax" placeholder="+∞">
+            </div>
+            <div class="filter-buttons">
+                <button id="resetFiltersBtn" class="badge" style="background:#ef4444; border:none; cursor:pointer;">Сбросить фильтры</button>
+            </div>
+        </div>
+
+        <div class="quick-filters">
+            <button id="btnNoReadings" class="badge" style="background:#f59e0b; border:none; cursor:pointer;">📅 Не передавали показания (2 мес)</button>
+            <button id="btnNoPayments" class="badge" style="background:#f59e0b; border:none; cursor:pointer;">💰 Не оплачивали (2 мес)</button>
+            <button id="btnDebtOver300" class="badge" style="background:#ef4444; border:none; cursor:pointer;">⚠️ Долг > 300 руб</button>
+        </div>
+
+        <div id="statsContainer" class="loader">Загрузка данных...</div>
+    </div>
+
+    <div class="card">
+        <h2>💰 Общая сводка (по отфильтрованным данным)</h2>
+        <div id="summaryContainer"></div>
+    </div>
+
+    <footer>Данные из counts.json, pay.json, tarifs.json</footer>
+</div>
+
+<script src="stats.js"></script>
+</body>
+</html>

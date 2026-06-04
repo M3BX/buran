@@ -1,0 +1,194 @@
+* {
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+}
+body {
+    background: #f1f5f9;
+    margin: 0;
+    padding: 12px;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.card {
+    background: white;
+    border-radius: 28px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+h1 {
+    font-size: 1.6rem;
+    margin: 0 0 6px 0;
+    color: #0f172a;
+}
+h2 {
+    font-size: 1.3rem;
+    margin: 0 0 12px 0;
+    color: #1e293b;
+    border-left: 5px solid #3b82f6;
+    padding-left: 15px;
+}
+.badge {
+    background: #e2e8f0;
+    padding: 6px 12px;
+    border-radius: 40px;
+    font-size: 0.8rem;
+    color: #1e293b;
+    display: inline-block;
+}
+.box-item {
+    background: #f8fafc;
+    border-radius: 20px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+}
+.form-group {
+    flex: 1;
+    min-width: 0;
+}
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #334155;
+    font-size: 0.9rem;
+}
+select, input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 20px;
+    border: 1px solid #cbd5e1;
+    background: white;
+    font-size: 0.95rem;
+}
+button {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+button:hover {
+    background: #2563eb;
+}
+.remove-box {
+    background: #ef4444;
+    padding: 8px 12px;
+}
+.remove-box:hover {
+    background: #dc2626;
+}
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 16px;
+}
+.modal-content {
+    background: white;
+    max-width: 550px;
+    width: 100%;
+    border-radius: 32px;
+    padding: 20px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+}
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #64748b;
+}
+.result-line {
+    margin: 12px 0;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border-bottom: 1px dashed #e2e8f0;
+    padding-bottom: 8px;
+}
+.result-total {
+    font-weight: 800;
+    font-size: 1rem;
+    margin-top: 16px;
+    background: #f1f5f9;
+    padding: 12px;
+    border-radius: 20px;
+    text-align: center;
+}
+footer {
+    text-align: center;
+    color: #64748b;
+    font-size: 0.7rem;
+    margin-top: 24px;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 640px) {
+    .form-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+    /* Первая строка: выбор бурана и бокса + кнопка удаления */
+    .form-row .form-group:first-child,
+    .form-row .form-group:nth-child(2) {
+        width: 100%;
+    }
+    .form-group:last-child {
+        width: auto;
+        align-self: flex-end;
+    }
+    .remove-box {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        padding: 0;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 8px;
+    }
+    .form-group:last-child label {
+        display: none;
+    }
+    button {
+        width: 100%;
+    }
+    .card {
+        padding: 16px;
+    }
+    h1 {
+        font-size: 1.4rem;
+    }
+    h2 {
+        font-size: 1.2rem;
+    }
+}

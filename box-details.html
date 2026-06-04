@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>История бокса | Учёт электроэнергии</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .box-selector {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 24px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: flex-end;
+        }
+        .selector-group {
+            flex: 1;
+            min-width: 180px;
+        }
+        .selector-group label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+        }
+        .selector-group select, .selector-group button {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 20px;
+            border: 1px solid #cbd5e1;
+            font-size: 0.95rem;
+        }
+        .selector-group button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .selector-group button:hover {
+            background: #2563eb;
+        }
+        .balance-card {
+            background: #f1f5f9;
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .balance-amount {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+        .balance-positive {
+            color: #dc2626;
+        }
+        .balance-negative {
+            color: #10b981;
+        }
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .event-card {
+            background: white;
+            border-radius: 20px;
+            padding: 16px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            border-left: 6px solid;
+            transition: 0.2s;
+        }
+        .event-card.reading {
+            border-left-color: #3b82f6;
+        }
+        .event-card.payment {
+            border-left-color: #10b981;
+        }
+        .event-card.accrual {
+            border-left-color: #f59e0b;
+        }
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        .event-date {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #1e293b;
+        }
+        .event-type {
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 30px;
+            background: #e2e8f0;
+        }
+        .event-type.reading { background: #dbeafe; color: #1e40af; }
+        .event-type.payment { background: #d1fae5; color: #065f46; }
+        .event-type.accrual { background: #fef3c7; color: #92400e; }
+        .event-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .detail-item {
+            background: #f8fafc;
+            padding: 8px 12px;
+            border-radius: 16px;
+            font-size: 0.9rem;
+        }
+        .detail-label {
+            font-weight: 600;
+            margin-right: 8px;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #64748b;
+        }
+        @media (max-width: 640px) {
+            .box-selector {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .event-header {
+                flex-direction: column;
+                gap: 6px;
+            }
+            .event-details {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="nav-buttons" style="display: flex; gap: 12px; margin-bottom: 16px;">
+            <a href="index.html" class="badge" style="text-decoration: none; background:#3b82f6; color:white;">← На главную</a>
+            <a href="stats.html" class="badge" style="text-decoration: none; background:#3b82f6; color:white;">📊 Статистика</a>
+        </div>
+        <h1>📜 История бокса</h1>
+        <p>Показания, начисления, платежи — и текущий баланс</p>
+    </div>
+
+    <div class="card">
+        <h2>🔎 Выберите бокс</h2>
+        <div class="box-selector">
+            <div class="selector-group">
+                <label>Буран</label>
+                <select id="buranSelect">
+                    <option value="">-- выберите --</option>
+                    <option value="1">Буран 1</option>
+                    <option value="2">Буран 2</option>
+                </select>
+            </div>
+            <div class="selector-group">
+                <label>Бокс</label>
+                <select id="boxSelect" disabled>
+                    <option value="">-- сначала выберите Буран --</option>
+                </select>
+            </div>
+            <div class="selector-group">
+                <button id="loadHistoryBtn">📋 Показать историю</button>
+            </div>
+        </div>
+        <div id="balanceContainer" style="display: none;"></div>
+        <div id="historyContainer" class="loader">Выберите бокс и нажмите кнопку</div>
+    </div>
+    <footer></footer>
+</div>
+
+<script src="box-details.js"></script>
+</body>
+</html>

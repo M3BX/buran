@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>💡 | Буран</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+    <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+        <a href="stats.html" class="badge" style="text-decoration: none; background:#3b82f6; color:white;">📊 Статистика</a>
+        <a href="box-details.html" class="badge" style="text-decoration: none; background:#3b82f6; color:white;">📜 История
+            бокса</a>
+    </div>
+        <h1>🔌 Учёт электроэнергии</h1>
+        <p>Добавьте нужные боксы, введите показания — получите общий платёж</p>
+    </div>
+
+    <div class="card" id="formCard">
+        <h2>📝 Ввести новые показания для боксов</h2>
+        <div id="boxesContainer"></div>
+
+        <div style="display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap;">
+            <button type="button" id="addBoxBtn" style="background:#64748b;">+ Добавить бокс</button>
+            <button type="button" id="clearStorageBtn" style="background:#ef4444;">Очистить</button>
+            <button type="button" id="calcAllBtn" style="background:#3b82f6;">Рассчитать →</button>
+        </div>
+        <div class="badge" style="margin-top: 12px;">ℹ️ Боксы сохраняются в браузере. При следующем открытии они будут загружены автоматически.</div>
+    </div>
+
+    <div class="card" id="tariffCard">
+        <div id="tariffInfo"></div>
+    </div>
+    <footer>Загрузка даты...</footer>
+</div>
+
+<!-- Модальное окно для результата -->
+<div id="resultModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <!-- <h3>🧾 Результат</h3> -->
+            <button class="close-modal">&times;</button>
+        </div>
+        <div id="modalBody"></div>
+    </div>
+</div>
+
+<!-- Модальное окно для уведомлений -->
+<div id="alertModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>📢 Уведомления</h3>
+            <button class="close-alert-modal">&times;</button>
+        </div>
+        <div id="alertModalBody"></div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
